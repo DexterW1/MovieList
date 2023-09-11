@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+html {
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    background-color: whitesmoke;
+}
+.title{
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 50px;
+}
+.search-container{
+    justify-content: center;
+    display: flex;
+    padding: 0 30px;
+}
+#search-bar{
+    width: 100%;
+    max-width: 1000px;
+    height: 30px;
+    border-radius: 25px;
+    border-color: black;
+    border-width: 3px;
+    font-size: 20px;
+    padding-left: 15px
+}
+#search-button{
+    padding: 5px 15px;
+    margin-left: 10px;
+    border-radius: 10px;
+    border-width: 3px;
+}
