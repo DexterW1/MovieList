@@ -33,3 +33,11 @@ body{
     border-radius: 10px;
     border-width: 3px;
 }
+.movie-box{
+    display: flex;
+    margin: 10px 10px;
+}
+.movie-box img{
+    padding: 10px 10px;
+
+}
