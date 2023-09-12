@@ -13,7 +13,7 @@ body{
     font-size: 50px;
 }
 .search-container{
-    justify-content: space-evenly;
+    justify-content: center;
     display: flex;
     padding: 0 30px;
 }
@@ -35,15 +35,15 @@ body{
     padding-left: 15px
 }
 .btn{
-    padding: 5px 15px;
+    height: 30px;
+    border-width: 1px;
+    justify-content: center;
+    align-items: center;
     margin-left: 10px;
     border-radius: 10px;
     border-width: 3px;
 }
-#search-button::before{
-    content: "\e8b6";
-    font-family: 'Material Icons';
-}
+
 .movie-box{
     display: flex;
     margin: 10px 10px;
