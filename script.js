@@ -1,3 +1,4 @@
+//Global variables 
 const apiKey = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlYjA3YzgyNjZiMWQyMjQyMWIxZDlkMGUwYTc4OGU1MSIsInN1YiI6IjY0Zjk1ODAyNGNjYzUwMTg3NTNlNWVkYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.xwgzMem5ovxzdVP8TOhltE4pYPLTiScVYeZj8BncAL0';
 const movieBoxContainer=document.getElementById('movie-item');
 const options = {
@@ -7,30 +8,41 @@ const options = {
       Authorization: `Bearer ${apiKey}`,
     }
   };
-
 const searchbar = document.getElementById('search-bar');
 const searchButton = document.getElementById('search-button');
+const filterOption = document.getElementById('filter');
 let searchText;
-let searchResults = [];
+let filterResult;
+let searchArray = [];
 
+//Event Listner for button click to search
 searchButton.addEventListener('click',()=>{
     searchText=searchbar.value;
     searchTMDB();
 });
-
+//Event listner for pressing 'Enter' to search
 searchbar.addEventListener('keydown',(event)=>{
     if(event.key==='Enter'){
         searchText = event.target.value;
         searchTMDB();
     }
 })
+//Event Listner for 'change' of filter option
+filterOption.addEventListener('change',()=>{
+    filterResult=filterOption.value;
+    console.log(filterResult);
+    sortByFilter();
+    displayData();
+})
 
+
+//Function to query and grab data, assign to searchResults array and then display the data
 async function searchTMDB(){
     const searchMovieUrl = `https://api.themoviedb.org/3/search/movie?query=${searchText}`;
     try {
         const response = await fetch (searchMovieUrl,options);
         const data = await response.json();
-        searchResults=data.results;
+        searchArray=data.results;
         displayData();
         
     } catch (error) {
@@ -44,15 +56,15 @@ function setAttributes(element,attribute){
         element.setAttribute(key,attribute[key]);
     }
 }
-
+//Display the data
 function displayData(){
     const imageUrl = `https://api.themoviedb.org/3/movie/movie_id/images`;
-    let totalResults = searchResults.length;
-    console.log(searchResults);
+    let totalResults = searchArray.length;
+    console.log(searchArray);
     while (movieBoxContainer.firstChild) {
         movieBoxContainer.removeChild(movieBoxContainer.firstChild);
     }
-    searchResults.forEach((result)=>{
+    searchArray.forEach((result)=>{
         const img = document.createElement('img');
         if(result.poster_path!=null){
             setAttributes(img,{
@@ -63,9 +75,17 @@ function displayData(){
         }
     });
 }
-
-
-
-
-//On Load
-//searchTMDB();
+//Function to sort the results of searchArray
+function sortByFilter(){
+    if(filterResult==="Popularity"){
+        console.log("eneteredsortbyfilter");
+        searchArray= searchArray.sort((a,b)=>b.popularity-a.popularity);
+    }
+    else if(filterResult==="Release Date"){
+        searchArray = searchArray.sort((a,b)=>{
+            const dateA= new Date(a.release_date);
+            const dateB= new Date(b.release_date);
+            return dateB-dateA;
+        })
+    }
+}

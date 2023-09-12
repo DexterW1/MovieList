@@ -13,25 +13,36 @@ body{
     font-size: 50px;
 }
 .search-container{
-    justify-content: center;
+    justify-content: space-evenly;
     display: flex;
     padding: 0 30px;
+}
+#filter{
+    border-radius: 30px;
+    margin-right: 10px;
+    border-width: 3px;
+    border-color: rgb(71, 207, 139);
+    font-family: 'Ubuntu',sans-serif;
 }
 #search-bar{
     width: 100%;
     max-width: 1000px;
     height: 30px;
     border-radius: 25px;
-    border-color: black;
+    border-color: rgb(33, 202, 214);
     border-width: 3px;
     font-size: 20px;
     padding-left: 15px
 }
-#search-button{
+.btn{
     padding: 5px 15px;
     margin-left: 10px;
     border-radius: 10px;
     border-width: 3px;
+}
+#search-button::before{
+    content: "\e8b6";
+    font-family: 'Material Icons';
 }
 .movie-box{
     display: flex;
