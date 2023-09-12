@@ -9,8 +9,14 @@ const options = {
   };
 
 const searchbar = document.getElementById('search-bar');
+const searchButton = document.getElementById('search-button');
 let searchText;
 let searchResults = [];
+
+searchButton.addEventListener('click',()=>{
+    searchText=searchbar.value;
+    searchTMDB();
+});
 
 searchbar.addEventListener('keydown',(event)=>{
     if(event.key==='Enter'){
@@ -61,6 +67,5 @@ function displayData(){
 
 
 
-
 //On Load
-searchTMDB();
+//searchTMDB();

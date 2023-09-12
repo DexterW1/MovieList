@@ -36,8 +36,12 @@ body{
 .movie-box{
     display: flex;
     margin: 10px 10px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 .movie-box img{
+    width: 200px;
+    height: 200;
     padding: 10px 10px;
 
 }
