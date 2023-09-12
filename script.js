@@ -14,6 +14,8 @@ const filterOption = document.getElementById('filter');
 let searchText;
 let filterResult;
 let searchArray = [];
+let movieIdOfSearchArray=[];
+let movieIdActorName = [];
 
 //Event Listner for button click to search
 searchButton.addEventListener('click',()=>{
@@ -56,14 +58,22 @@ function setAttributes(element,attribute){
         element.setAttribute(key,attribute[key]);
     }
 }
+//Function that grabs all Movie Id of the searchArray
+function grabMovieIDs(){
+    searchArray.forEach((movie)=>{
+        movieIdOfSearchArray.push(movie.id);
+    })
+}
 //Display the data
 function displayData(){
     const imageUrl = `https://api.themoviedb.org/3/movie/movie_id/images`;
     let totalResults = searchArray.length;
+    movieIdOfSearchArray=[];
     console.log(searchArray);
     while (movieBoxContainer.firstChild) {
         movieBoxContainer.removeChild(movieBoxContainer.firstChild);
     }
+    
     searchArray.forEach((result)=>{
         const img = document.createElement('img');
         if(result.poster_path!=null){
@@ -74,11 +84,31 @@ function displayData(){
             movieBoxContainer.appendChild(img);
         }
     });
+    grabMovieIDs();
+    movieLoop();
+    //console.log(movieIdActorName);
+}
+//Function to get movie details
+async function movieDetails(movieID){
+        const movieDetailsUrl= `https://api.themoviedb.org/3/movie/${movieID}/casts?api_key=eb07c8266b1d22421b1d9d0e0a788e51`;
+        try {
+            const response = await fetch (movieDetailsUrl,options);
+            const data = await response.json();
+            console.log(data);
+            //movieIdActorName.push(data.cast[0].name);
+        } catch (error) {
+            console.log(error);
+        }
+}
+//Function to loop through movieDetails
+function movieLoop(){
+    for(const movieId of movieIdOfSearchArray){
+        movieDetails(movieId);
+    }
 }
 //Function to sort the results of searchArray
 function sortByFilter(){
     if(filterResult==="Popularity"){
-        console.log("eneteredsortbyfilter");
         searchArray= searchArray.sort((a,b)=>b.popularity-a.popularity);
     }
     else if(filterResult==="Release Date"){
@@ -89,3 +119,5 @@ function sortByFilter(){
         })
     }
 }
+
+//On load
