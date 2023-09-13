@@ -11,11 +11,17 @@ const options = {
 const searchbar = document.getElementById('search-bar');
 const searchButton = document.getElementById('search-button');
 const filterOption = document.getElementById('filter');
+const modal = document.getElementById('myModal');
+const modalTitle = document.getElementById('modal-title');
+const modalReleaseDate = document.getElementById('modal-release-date');
+const modalOverview = document.getElementById('modal-overview');
+const closeBtn = document.querySelector('.close');
 let searchText;
 let filterResult;
 let searchArray = [];
 let movieIdOfSearchArray=[];
 let movieIdActorName = [];
+let selectedMovieId;
 
 //Event Listner for button click to search
 searchButton.addEventListener('click',()=>{
@@ -32,9 +38,12 @@ searchbar.addEventListener('keydown',(event)=>{
 //Event Listner for 'change' of filter option
 filterOption.addEventListener('change',()=>{
     filterResult=filterOption.value;
-    console.log(filterResult);
+    //console.log(filterResult);
     sortByFilter();
     displayData();
+})
+closeBtn.addEventListener('click',()=>{
+    modal.style.display='none';
 })
 
 
@@ -52,10 +61,33 @@ async function searchTMDB(){
     }
 }
 
+//Function to get movie details
+async function movieDetails(movieID){
+    const movieDetailsUrl= `https://api.themoviedb.org/3/movie/${movieID}/casts?api_key=eb07c8266b1d22421b1d9d0e0a788e51`;
+    try {
+        const response = await fetch (movieDetailsUrl,options);
+        const data = await response.json();
+        //console.log(data);
+        movieIdActorName.push(data);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 //Helper function to Set Attributes on DOM Elements
 function setAttributes(element,attribute){
     for (const key in attribute){
         element.setAttribute(key,attribute[key]);
+    }
+}
+
+//Helper function to grab the name of Main Cast of selected movie
+function grabSelectedMovieName(){
+    let name = '';
+    for(movie of movieIdActorName){
+        if(movie.id === selectedMovieId){
+            return movie.cast[0].name;
+        }
     }
 }
 //Function that grabs all Movie Id of the searchArray
@@ -66,10 +98,8 @@ function grabMovieIDs(){
 }
 //Display the data
 function displayData(){
-    const imageUrl = `https://api.themoviedb.org/3/movie/movie_id/images`;
-    let totalResults = searchArray.length;
-    movieIdOfSearchArray=[];
     console.log(searchArray);
+    movieIdOfSearchArray=[];
     while (movieBoxContainer.firstChild) {
         movieBoxContainer.removeChild(movieBoxContainer.firstChild);
     }
@@ -81,6 +111,10 @@ function displayData(){
                 src: `https://image.tmdb.org/t/p/w500/${result.poster_path}`,
                 title: result.title,
             });
+            img.addEventListener(('click'),()=>{
+                selectedMovieId=result.id;
+                openModal(result);
+            })
             movieBoxContainer.appendChild(img);
         }
     });
@@ -88,23 +122,24 @@ function displayData(){
     movieLoop();
     //console.log(movieIdActorName);
 }
-//Function to get movie details
-async function movieDetails(movieID){
-        const movieDetailsUrl= `https://api.themoviedb.org/3/movie/${movieID}/casts?api_key=eb07c8266b1d22421b1d9d0e0a788e51`;
-        try {
-            const response = await fetch (movieDetailsUrl,options);
-            const data = await response.json();
-            console.log(data);
-            //movieIdActorName.push(data.cast[0].name);
-        } catch (error) {
-            console.log(error);
-        }
-}
+
 //Function to loop through movieDetails
 function movieLoop(){
     for(const movieId of movieIdOfSearchArray){
         movieDetails(movieId);
     }
+}
+
+//Function redisplay selected movie
+function redisplaySelectedMovie(){
+    let selectedMovieArray =[];
+    let targetName = grabSelectedMovieName();
+    for(movie of movieIdActorName){
+        if(movie.cast.length>0 && movie.cast[0].name===targetName){
+            selectedMovieArray.push(movie);
+        }
+    }
+    console.log(selectedMovieArray);
 }
 //Function to sort the results of searchArray
 function sortByFilter(){
@@ -120,4 +155,26 @@ function sortByFilter(){
     }
 }
 
-//On load
+//Function to open the modal and siaply movie details
+function openModal(movie,seriesArray){
+    redisplaySelectedMovie();
+    modalTitle.textContent=movie.title;
+    modalReleaseDate.textContent=`Release Date: ${movie.release_date}`;
+    modalOverview.textContent=`Overview: ${movie.overview}`;
+    modal.style.display='block';
+    const posterImg = document.createElement('img');
+    posterImg.src = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
+    posterImg.alt = movie.title;
+
+    const modalContent = document.querySelector('.modal-content');
+    const existingPosterImg = modalContent.querySelector('img');
+    if(existingPosterImg){
+        modalContent.removeChild(existingPosterImg);
+    }
+    modalContent.insertBefore(posterImg,modalContent.firstChild);
+    if(seriesArray.length>1){
+        const h3Element = document.createElement('h3');
+
+    }
+    
+}
