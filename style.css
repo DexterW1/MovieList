@@ -101,23 +101,7 @@ body {
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.7);
   }
-  
-  .modal-content {
-    display: flex;
-    flex-direction: column;
-    background: linear-gradient(43deg, #4158d0 0%, #c850c0 46%, #ffcc70 100%);
-    margin: 15% auto;
-    position: relative;
-    padding: 20px;
-    border-radius: 10px;
-    width: 80%; /* Set a fixed width for small screens */
-    max-width: 400px; /* Maximum width for small screens */
-    height: 80%; /* Set a fixed height for small screens */
-    max-height: 600px; /* Maximum height for small screens */
-    text-align: left; /* Align text to the left */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added box shadow */
-  }
-  
+    
   /* Modal content styling for larger screens */
   @media (min-width: 768px) {
     .modal-content {
@@ -127,19 +111,55 @@ body {
       max-height: 800px; /* Maximum height for larger screens */
     }
   }
+  .modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center-align items horizontally */
+    justify-content: center; /* Center-align items vertically */
+    background: linear-gradient(43deg, #4158d0 0%, #c850c0 46%, #ffcc70 100%);
+    margin: 15% auto;
+    position: relative;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%; /* Set a fixed width for small screens */
+    max-width: 400px; /* Maximum width for small screens */
+    height: 80%; /* Set a fixed height for small screens */
+    max-height: 600px; /* Maximum height for small screens */
+    text-align: left;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* border: 2px solid blue; */
+  }
   
-  .modal-content img {
-    margin: 0 center;
+  .modal-content #main-poster {
+    margin: 0; /* Remove any previous margin */
     display: block;
-    width: 300px;
-    height: 300px;
+    width: 80%;
+    height: 40%;
     object-fit: contain;
+    /* border: 2px solid blue; */
+  }
+  .modal-series {
+    display: flex;
+    flex-direction: row;
+    align-items: left;
+    justify-content: space-around;
+    /* border: 2px solid red; */
+  }
+  .modal-series img{
+    margin: 0; /* Remove any previous margin */
+    display: flex;
+    flex-direction: row;
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    /* border: 2px solid red; */
   }
 
   .modal-content p {
-    margin: 0; /* Remove default margins */
+    margin: 1px; /* Remove default margins */
     text-align: left; /* Center-align the paragraphs */
     flex-grow: 1; /* Allow paragraphs to grow and take remaining space */
+    /* border: 2px solid blue; */
   }
   
   /* Close button styling */

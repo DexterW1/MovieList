@@ -98,7 +98,7 @@ function grabMovieIDs(){
 }
 //Display the data
 function displayData(){
-    console.log(searchArray);
+    //console.log(searchArray);
     movieIdOfSearchArray=[];
     while (movieBoxContainer.firstChild) {
         movieBoxContainer.removeChild(movieBoxContainer.firstChild);
@@ -113,14 +113,14 @@ function displayData(){
             });
             img.addEventListener(('click'),()=>{
                 selectedMovieId=result.id;
-                openModal(result);
+                openModal(result,);
             })
             movieBoxContainer.appendChild(img);
         }
     });
     grabMovieIDs();
     movieLoop();
-    //console.log(movieIdActorName);
+    console.log(searchArray);
 }
 
 //Function to loop through movieDetails
@@ -130,16 +130,14 @@ function movieLoop(){
     }
 }
 
-//Function redisplay selected movie
+//Function that filters the selected movie to see if it is in a series if so then we return the array
 function redisplaySelectedMovie(){
-    let selectedMovieArray =[];
     let targetName = grabSelectedMovieName();
-    for(movie of movieIdActorName){
-        if(movie.cast.length>0 && movie.cast[0].name===targetName){
-            selectedMovieArray.push(movie);
-        }
-    }
-    console.log(selectedMovieArray);
+    const selectedMovieArray=movieIdActorName.filter((movie)=>movie.cast.length>0 && movie.cast[0].name===targetName).map((movie)=>movie.id);
+    const matchedArray = searchArray.filter((movie)=>{
+        return selectedMovieArray.includes(movie.id);
+    });
+    return matchedArray;
 }
 //Function to sort the results of searchArray
 function sortByFilter(){
@@ -156,8 +154,15 @@ function sortByFilter(){
 }
 
 //Function to open the modal and siaply movie details
-function openModal(movie,seriesArray){
-    redisplaySelectedMovie();
+function openModal(movie){
+    let checkSeries = redisplaySelectedMovie();
+    //sort checkSeries by releaste date
+    checkSeries = checkSeries.sort((a,b)=>{
+        const dateA = new Date(a.release_date);
+        const dateB = new Date(b.release_date);
+        return dateA-dateB;
+    })
+    //this part of the code creates the modal and display
     modalTitle.textContent=movie.title;
     modalReleaseDate.textContent=`Release Date: ${movie.release_date}`;
     modalOverview.textContent=`Overview: ${movie.overview}`;
@@ -165,16 +170,41 @@ function openModal(movie,seriesArray){
     const posterImg = document.createElement('img');
     posterImg.src = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
     posterImg.alt = movie.title;
-
+    posterImg.id = 'main-poster';
     const modalContent = document.querySelector('.modal-content');
     const existingPosterImg = modalContent.querySelector('img');
     if(existingPosterImg){
         modalContent.removeChild(existingPosterImg);
     }
     modalContent.insertBefore(posterImg,modalContent.firstChild);
-    if(seriesArray.length>1){
-        const h3Element = document.createElement('h3');
 
-    }
-    
+    //This part of the code checks to see if it is in a series
+     if(checkSeries.length >1){
+        const modalSeries = document.querySelector('.modal-series');
+
+        const h3Element = document.createElement('h3');
+        h3Element.textContent='Series';
+        while(modalSeries.firstChild){
+            modalSeries.removeChild(modalSeries.firstChild);
+        }
+        //foreach
+        checkSeries.forEach((movie)=>{
+            const seriesPoster = document.createElement('img');
+            setAttributes(seriesPoster,{
+                src: `https://image.tmdb.org/t/p/w500/${movie.poster_path}`,
+                alt: movie.title,
+            });
+            modalSeries.appendChild(seriesPoster);
+        });
+     }else{
+        const modalSeries = document.querySelector('.modal-series');
+        const existingH3 = modalSeries.querySelector('h3');
+        if(existingH3){
+            modalSeries.removeChild(existingH3);
+        }
+        while(modalSeries.firstChild){
+            modalSeries.removeChild(modalSeries.firstChild);
+        }
+     }
+
 }
