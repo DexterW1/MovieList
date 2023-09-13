@@ -26,37 +26,41 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px; /* Increased padding for spacing */
+  gap: 10px;
+  padding: 0; /* Increased padding for spacing */
+  margin: 0;
+  /* border: 2px solid black; */
+  flex-wrap: wrap;
 }
 
 /* Filter dropdown styling */
 #filter {
   border: 2px solid rgb(71, 207, 139);
   border-radius: 30px;
-  padding: 5px 10px; /* Adjusted padding */
+  padding: 0; /* Adjusted padding */
   font-family: 'Ubuntu', sans-serif;
   font-size: 16px; /* Adjusted font size */
 }
 
 /* Search bar styling */
 #search-bar {
-  flex-grow: 1;
-  max-width: 400px; /* Adjusted max-width */
+  width: 30%;
   height: 30px;
-  border: 2px solid rgb(33, 202, 214);
+  border: 2px solid rgb(71, 207, 139);
   border-radius: 25px;
   font-size: 16px; /* Adjusted font size */
-  padding: 5px 15px; /* Adjusted padding */
+  padding: 0; /* Adjusted padding */
 }
 
 /* Search button styling */
 .btn {
   height: 36px; /* Increased height for better visibility */
+  width: 40px;
   border: 2px solid rgb(71, 207, 139);
   border-radius: 18px; /* Half of the height for a round button */
   font-family: 'Ubuntu', sans-serif;
   font-size: 16px; /* Adjusted font size */
-  padding: 0 20px; /* Adjusted padding */
+  padding: 0; /* Adjusted padding */
   cursor: pointer; /* Added cursor style */
   background-color: rgb(71, 207, 139); /* Background color on hover */
   color: white; /* Text color on hover */
@@ -100,6 +104,7 @@ body {
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.7);
+    border: 2px solid green;
   }
     
   /* Modal content styling for larger screens */
@@ -127,7 +132,7 @@ body {
     max-height: 600px; /* Maximum height for small screens */
     text-align: left;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    /* border: 2px solid blue; */
+     border: 2px solid blue; 
   }
   
   .modal-content #main-poster {
