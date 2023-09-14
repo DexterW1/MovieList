@@ -166,7 +166,7 @@ function openModal(movie){
     modalTitle.textContent=movie.title;
     modalReleaseDate.textContent=`Release Date: ${movie.release_date}`;
     modalOverview.textContent=`Overview: ${movie.overview}`;
-    modal.style.display='block';
+    modal.style.display='flex';
     const posterImg = document.createElement('img');
     posterImg.src = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
     posterImg.alt = movie.title;
