@@ -180,6 +180,7 @@ function openModal(movie){
 
     //This part of the code checks to see if it is in a series
      if(checkSeries.length >1){
+        modalContent.classList.remove('empty');
         const modalSeries = document.querySelector('.modal-series');
         modalSeries.style.display = 'flex'
         const h3Element = document.createElement('h3');
@@ -205,6 +206,7 @@ function openModal(movie){
         while(modalSeries.firstChild){
             modalSeries.removeChild(modalSeries.firstChild);
         }
+        modalContent.classList.add('empty');
      }
 
 }

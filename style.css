@@ -14,7 +14,6 @@ body {
   font-weight: 300; /* Added font-weight */
   
 }
-/* Ocen background */
 
 /* Title styling */
 .title {
@@ -89,6 +88,7 @@ body {
   margin: 10px; /* Adjusted margin for spacing */
   cursor: pointer; /* Added cursor style */
   transition: transform 0.2s; /* Smooth transform on hover */
+
 }
 
 .movie-box img:hover {
@@ -125,8 +125,7 @@ body {
   border-radius: 10px;
   width: 80%; /* Set a fixed width for small screens */
   max-width: 600px; /* Maximum width for small screens */
-  height: auto; 
-  max-height: 1000px; /* Maximum height for small screens */
+  max-height: 900px; /* Maximum height for small screens */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   /* border: 10px solid blue;  */
 }
@@ -154,7 +153,8 @@ body {
   height: 100px;
   object-fit: contain;
   cursor: pointer;
-  transition: transform 0.2s
+  transition: transform 0.2s;
+  margin-bottom: 8%;
   /* border: 2px solid peachpuff; */
 }
 .modal-series img:hover{
@@ -184,9 +184,10 @@ body {
 .modal-content #modal-overview{
   height: auto;
   margin: 0;
-  padding-bottom: 2px;
 }
-
+.modal-content.empty{
+  max-height: 450px;
+}
 /* Modal content styling for larger screens */
 @media (min-width: 1000px) {
   .modal-content {
@@ -197,12 +198,15 @@ body {
     margin: 5% auto;
   }
   .modal-content #modal-overview{
-    padding-bottom: 10px;
+    padding-bottom: 12%;
   }
   .modal-series img{
      height: auto; 
+     justify-content: center;
+     align-content: center;
   }
 }
+
 /* Close button styling */
 .close {
   position: absolute;
