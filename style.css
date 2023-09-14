@@ -12,7 +12,9 @@ body {
   background-color: #f5f5f5; /* Changed background color */
   font-family: 'Ubuntu', sans-serif;
   font-weight: 300; /* Added font-weight */
+  
 }
+/* Ocen background */
 
 /* Title styling */
 .title {
@@ -116,8 +118,6 @@ body {
 .modal-content {
   display: flex;
   flex-direction: column;
-  /* align-items: center; Center-align items horizontally */
-  /* justify-content: center; Center-align items vertically */
   background: linear-gradient(43deg, #4158d0 0%, #c850c0 46%, #ffcc70 100%);
   margin: 15% auto;
   position: relative; 
@@ -140,15 +140,15 @@ body {
   /* border: 2px solid coral;  */
 }
 .modal-series {
-  display: flex;
+  display: none;
   justify-content: space-evenly;
-  flex-grow: 1;
-  /* border: 2px solid red; */
+  border: 2px solid red;
 }
 .modal-series img{
   margin: 0; /* Remove any previous margin */
   display: flex;
   flex-direction: row;
+  justify-content: center;
   width: 100px;
   height: 100px;
   object-fit: contain;
@@ -173,11 +173,16 @@ body {
 }
 
 /* Modal content styling for larger screens */
-@media (min-width: 768px) {
+@media (min-width: 1000px) {
   .modal-content {
-    width: 40%; /* Set a different width for larger screens */
-    max-width: 600px; /* Maximum width for larger screens */
+    /* width: 80%; Set a different width for larger screens */
+    /* max-width: 600px; Maximum width for larger screens */
+    height: auto;
+    max-height: 700px;
     margin: 5% auto;
+  }
+  .modal-series img{
+     height: auto; 
   }
 }
 /* Close button styling */

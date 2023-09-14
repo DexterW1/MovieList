@@ -113,7 +113,7 @@ function displayData(){
             });
             img.addEventListener(('click'),()=>{
                 selectedMovieId=result.id;
-                openModal(result,);
+                openModal(result);
             })
             movieBoxContainer.appendChild(img);
         }
@@ -181,7 +181,7 @@ function openModal(movie){
     //This part of the code checks to see if it is in a series
      if(checkSeries.length >1){
         const modalSeries = document.querySelector('.modal-series');
-
+        modalSeries.style.display = 'flex'
         const h3Element = document.createElement('h3');
         h3Element.textContent='Series';
         while(modalSeries.firstChild){
