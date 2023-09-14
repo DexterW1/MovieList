@@ -133,6 +133,7 @@ body {
   
 .modal-content #main-poster {
   margin: 0 auto; /* Remove any previous margin */
+  padding-top: 5%;
   display: block;
   width: 80%; 
   height: 40%;
@@ -142,7 +143,7 @@ body {
 .modal-series {
   display: none;
   justify-content: space-evenly;
-  border: 2px solid red;
+  /* border: 2px solid red; */
 }
 .modal-series img{
   margin: 0; /* Remove any previous margin */
@@ -162,6 +163,8 @@ body {
 .modal-content h2{
   align-self: starts;
   display: block;
+  margin-top: 50px;
+  margin-bottom: 5px;
   /* border: 2px solid green; */
 }
 
@@ -170,6 +173,18 @@ body {
   text-align: left; /* Center-align the paragraphs */
   flex-grow: 1; 
   /* border: 2px solid violet; */
+}
+.modal-content #modal-release-date{
+  height: auto;
+  max-height: 30px;
+  padding: 0;
+  margin: 0;
+}
+
+.modal-content #modal-overview{
+  height: auto;
+  margin: 0;
+  padding-bottom: 2px;
 }
 
 /* Modal content styling for larger screens */
@@ -180,6 +195,9 @@ body {
     height: auto;
     max-height: 700px;
     margin: 5% auto;
+  }
+  .modal-content #modal-overview{
+    padding-bottom: 10px;
   }
   .modal-series img{
      height: auto; 
