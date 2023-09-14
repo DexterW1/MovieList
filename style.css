@@ -153,8 +153,7 @@ body {
   height: 100px;
   object-fit: contain;
   cursor: pointer;
-  transition: transform 0.2s;
-  margin-bottom: 8%;
+  margin-bottom: 3%;
   /* border: 2px solid peachpuff; */
 }
 .modal-series img:hover{
@@ -198,12 +197,11 @@ body {
     margin: 5% auto;
   }
   .modal-content #modal-overview{
-    padding-bottom: 12%;
+    padding-bottom: 5%;
   }
   .modal-series img{
      height: auto; 
-     justify-content: center;
-     align-content: center;
+     margin-bottom: 50%;
   }
 }
 
