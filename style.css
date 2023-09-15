@@ -189,8 +189,12 @@ body {
   .modal-content #modal-overview{
     overflow: auto;
     margin-bottom: 10px;
+    height: 300px;
     /* border: 3px solid black; */
     margin-top: 2px;
+  }
+  .modal-series{
+    height: 2000px;
   }
   .modal-content{
     height: 90vh;
@@ -202,6 +206,9 @@ body {
     overflow-y: hidden;
     justify-content: start;
     height: 140px;
+  }
+  .modal-content.empty{
+    max-height: 550px;
   }
 }
 /* Modal content styling for larger screens */
