@@ -189,7 +189,7 @@ body {
   .modal-content #modal-overview{
     overflow: auto;
     margin-bottom: 10px;
-    border: 3px solid black;
+    /* border: 3px solid black; */
     margin-top: 2px;
   }
   .modal-content{
@@ -205,7 +205,7 @@ body {
   }
 }
 /* Modal content styling for larger screens */
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 500px) {
   .modal-content {
     /* width: 80%; Set a different width for larger screens */
     /* max-width: 600px; Maximum width for larger screens */
