@@ -47,6 +47,7 @@ closeBtn.addEventListener('click',()=>{
 })
 
 
+
 //Function to query and grab data, assign to searchResults array and then display the data
 async function searchTMDB(){
     const searchMovieUrl = `https://api.themoviedb.org/3/search/movie?query=${searchText}`;
